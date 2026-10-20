@@ -98,7 +98,13 @@
       <div class="flex items-center gap-3">
         <span class="text-2xl">🗓️</span>
         <div>
-          <h1 class="text-xl font-bold text-slate-800 tracking-tight">Buluşma Takvimi</h1>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold text-slate-800 tracking-tight">Buluşma Takvimi</h1>
+            <span id="syncStatusBadge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700 border border-amber-200">
+              <span id="syncDot" class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
+              <span id="syncText">Bağlanıyor...</span>
+            </span>
+          </div>
           <p class="text-xs text-slate-500 font-medium">Özüm • Irmak • Eflal • Erdoğan</p>
         </div>
       </div>
@@ -113,16 +119,16 @@
           </select>
         </div>
 
-        <!-- Dosya Olarak İndir (Adı Bulusma_Takvimi.html olarak iner) -->
+        <!-- Dosya Olarak İndir -->
         <button onclick="downloadUpdatedHTMLFile()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm transition flex items-center gap-1.5" title="Seçimleri içine kaydedip Bulusma_Takvimi.html olarak indirir">
           <span>💾</span>
-          <span>Kaydet & İndir</span>
+          <span>Yedek İndir</span>
         </button>
 
         <!-- Link Olarak Kopyala -->
         <button onclick="shareSaveLink()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-2 rounded-xl font-bold shadow-sm transition flex items-center gap-1.5">
           <span>🔗</span>
-          <span>Kaydet & Gönder</span>
+          <span>Linki Kopyala</span>
         </button>
 
         <button onclick="resetAllData()" class="text-rose-600 hover:bg-rose-50 px-2.5 py-1.5 rounded-xl font-semibold transition">
@@ -171,7 +177,7 @@
       <!-- SOL SÜTUN: KİŞİLER, İNTERAKTİF HAYVAN SAHNESİ & EKİP DURUMU -->
       <div class="lg:col-span-4 space-y-5">
 
-        <!-- Kişi Sekmeleri (Sadece İsimler + Özel Çizim Hayvan Simgeleri) -->
+        <!-- Kişi Sekmeleri -->
         <div class="bg-white p-3.5 rounded-3xl shadow-sm border border-slate-200/90">
           <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5 px-1">Kim Seçim Yapıyor?</p>
           <div class="grid grid-cols-2 gap-2.5" id="userTabsContainer"></div>
@@ -315,7 +321,7 @@
           </div>
         </div>
 
-        <!-- Katılımcı Renk Anahtarı (Özel Çizim Mini Hayvan İkonları İle) -->
+        <!-- Katılımcı Renk Anahtarı -->
         <div class="bg-white px-4 py-3 rounded-2xl shadow-sm border border-slate-200/90 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div class="flex flex-wrap items-center gap-2.5" id="legendContainer"></div>
           <div class="flex items-center gap-1.5 text-amber-700 font-bold bg-amber-50 px-3 py-1 rounded-xl border border-amber-200">
@@ -332,11 +338,12 @@
     </div>
   </main>
 
-  <!-- GÖMÜLÜ VERİ KAPSÜLÜ (Dosya Olarak İndirildiğinde Verileri Taşır) -->
+  <!-- GÖMÜLÜ VERİ KAPSÜLÜ -->
   <script id="embeddedStateScript">
     window.__EMBEDDED_STATE__ = null;
   </script>
 
+  <!-- ANA UYGULAMA KODU -->
   <script>
     /**************************************************************
      * 1. KİŞİ PROFİLLERİ VE ÖZEL SVG HAYVANLAR (CANLI + X GÖZLÜ)
@@ -385,12 +392,10 @@
           <svg viewBox="0 0 140 140" class="w-full h-full drop-shadow-sm">
             <ellipse cx="70" cy="123" rx="34" ry="12" fill="#e2e8f0"/>
             <g class="head-track">
-              <!-- Sarkık Kıvırcık Kulaklar -->
               <path class="anim-ear-l" d="M 36 48 C 18 48, 12 66, 16 84 C 18 95, 29 98, 35 88 C 39 78, 38 62, 36 48 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="2.8" stroke-linejoin="round"/>
               <path class="anim-ear-l" d="M 21 65 Q 26 70 22 77" fill="none" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round"/>
               <path class="anim-ear-r" d="M 104 48 C 122 48, 128 66, 124 84 C 122 95, 111 98, 105 88 C 101 78, 102 62, 104 48 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="2.8" stroke-linejoin="round"/>
               <path class="anim-ear-r" d="M 119 65 Q 114 70 118 77" fill="none" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round"/>
-              <!-- Kıvırcık Pofuduk Kafa (Tasmasız) -->
               <path d="M 44 36 Q 56 26 70 31 Q 84 26 96 36 Q 113 43 109 62 Q 117 77 105 92 Q 95 107 70 107 Q 45 107 35 92 Q 23 77 31 62 Q 27 43 44 36 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="2.8" stroke-linejoin="round"/>
               <path d="M 55 37 Q 63 43 71 36 Q 79 43 86 37" fill="none" stroke="#cbd5e1" stroke-width="2.5" stroke-linecap="round"/>
               ${isUnavailable ? `
@@ -428,7 +433,6 @@
           <svg viewBox="0 0 140 140" class="w-full h-full drop-shadow-sm">
             <ellipse cx="70" cy="122" rx="36" ry="11" fill="#e2e8f0"/>
             <g class="head-track">
-              <!-- Beyaz Ağırlıklı Gövde + Küçük Dokunuş -->
               <ellipse cx="70" cy="76" rx="46" ry="38" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
               <path d="M 25 68 Q 32 42 58 40 Q 52 62 31 76 Z" fill="#fed7aa" opacity="0.85"/>
               <path d="M 88 41 Q 105 45 112 60 Q 98 58 88 41 Z" fill="#fef3c7" opacity="0.9"/>
@@ -523,7 +527,7 @@
           deselect: 'Tamamdır, o saatten patimi çektim.',
           nav: 'Diğer günlere göz atıyoruz, gözlerim fırıl fırıl!',
           unavailable: 'Üzgünüm, bu buluşmaya katılamıyorum... Gözlerim X oldu 😔',
-          save: 'Harikasın Özüm! Seçimlerin kaydedildi, şimdi linki veya dosyayı diğerlerine gönderebilirsin! 🎉'
+          save: 'Harikasın Özüm! Seçimlerin canlı olarak ortak takvime kaydedildi! 🎉'
         }
       },
       irmak: {
@@ -548,7 +552,7 @@
           deselect: 'O saati bıraktık, başka zamana bakalım!',
           nav: 'Diğer günleri koklayarak kontrol ediyorum! 🐾',
           unavailable: 'Maalesef bu sefer aranızda olamayacağım... 😔',
-          save: 'Süpersin Irmak! Tüm müsaitliklerin kaydedildi! 🎉'
+          save: 'Süpersin Irmak! Tüm müsaitliklerin canlı olarak kaydedildi! 🎉'
         }
       },
       eflal: {
@@ -573,7 +577,7 @@
           deselect: 'Tamamdır, o saati sildik!',
           nav: 'Takvimde pıtı pıtı diğer günlere geçiyoruz!',
           unavailable: 'Bu buluşmaya katılamıyorum, bir dahaki sefere... 😔',
-          save: 'Harikasın Eflal! Seçimlerin kaydedildi, kutlama zamanı! 🎉'
+          save: 'Harikasın Eflal! Seçimlerin ortak takvime kaydedildi, kutlama zamanı! 🎉'
         }
       },
       erdogan: {
@@ -589,7 +593,7 @@
           glow: 'bg-teal-400'
         },
         quotes: {
-          idle: 'Hoş geldin Erdoğan! Saatlerini seçebilir ve ekibin durumunu aşağıdan takip edebilirsin.',
+          idle: 'Hoş geldin Erdoğan! Saatlerini seçebilir ve ekibin durumunu aşağıdan canlı takip edebilirsin.',
           select: [
             'Grrrr! Saat onaylandı, plana eklendi!',
             'Harika seçim! Ekiple ortak saat yaklaşıyor!',
@@ -598,7 +602,7 @@
           deselect: 'O saati listeden çıkardık.',
           nav: 'Takvimde ileri geri tarama yapılıyor!',
           unavailable: 'Bu hafta müsait değilim... 😔',
-          save: 'Harika! Seçimler tamamlandı ve kaydedildi! 🎩🎉'
+          save: 'Harika! Seçimler tamamlandı ve buluta kaydedildi! 🎩🎉'
         }
       }
     };
@@ -612,7 +616,7 @@
     ];
 
     /**************************************************************
-     * 2. VERİ MODELİ, URL/DOSYA SENKRONİZASYONU VE LOCALSTORAGE
+     * 2. VERİ MODELİ VE LOCALSTORAGE / FIREBASE YÖNETİMİ
      **************************************************************/
     let currentUser = 'ozum';
     let currentMode = 'online';
@@ -628,29 +632,16 @@
 
     const DEFAULT_STATE = {
       torinoOffset: -1,
-      online: {
-        '2026-10-18_20': ['irmak', 'eflal', 'erdogan'],
-        '2026-10-18_21': ['ozum', 'irmak', 'eflal', 'erdogan']
-      },
-      f2f: {
-        '2026-10-25_allday': ['ozum', 'irmak', 'eflal', 'erdogan']
-      },
-      inTurkeyDays: {
-        '2026-10-24': true,
-        '2026-10-25': true
-      },
+      online: {},
+      f2f: {},
+      inTurkeyDays: {},
       userStatus: {
-        ozum: 'completed',
-        irmak: 'completed',
-        eflal: 'completed',
+        ozum: 'pending',
+        irmak: 'pending',
+        eflal: 'pending',
         erdogan: 'pending'
       },
-      platformVotes: {
-        ozum: 'facetime',
-        irmak: 'facetime',
-        eflal: 'whatsapp',
-        erdogan: 'zoom'
-      },
+      platformVotes: {},
       meetingInfo: {
         platform: 'facetime',
         linkOrNumber: ''
@@ -665,7 +656,6 @@
           const encoded = window.location.hash.replace('#data=', '');
           const decoded = JSON.parse(decodeURIComponent(escape(atob(encoded))));
           localStorage.setItem('bulusma_takvimi_state_v5', JSON.stringify(decoded));
-          showToast('📥 Paylaşılan güncel takvim verileri yüklendi!');
           return decoded;
         }
       } catch (e) {}
@@ -687,10 +677,27 @@
 
     function persistState() {
       localStorage.setItem('bulusma_takvimi_state_v5', JSON.stringify(appState));
-      try {
-        const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(appState))));
-        history.replaceState(null, '', '#data=' + encoded);
-      } catch (e) {}
+      if (typeof window.syncStateToFirebase === 'function') {
+        window.syncStateToFirebase(appState);
+      }
+    }
+
+    function refreshUIFromCloud() {
+      const torinoSelect = document.getElementById('torinoOffsetSelect');
+      if (torinoSelect) torinoSelect.value = String(appState.torinoOffset || -1);
+
+      const linkInput = document.getElementById('meetingLinkInput');
+      if (linkInput && document.activeElement !== linkInput) {
+        linkInput.value = appState.meetingInfo?.linkOrNumber || '';
+      }
+
+      renderUserTabs();
+      updateMascotStage('idle');
+      renderPlatforms();
+      renderActiveMeetingBanner();
+      renderCalendar();
+      renderTeamStatusPanel();
+      renderOverlapSummary();
     }
 
     function downloadUpdatedHTMLFile() {
@@ -713,19 +720,17 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      showToast('💾 "Bulusma_Takvimi.html" indirildi! Arkadaşlarına gönderebilirsin.');
+      showToast('💾 "Bulusma_Takvimi.html" yedeği indirildi!');
     }
 
     function shareSaveLink() {
       persistState();
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(appState))));
-      const baseUrl = window.location.href.split('#')[0];
-      const fullShareUrl = `${baseUrl}#data=${encoded}`;
+      const cleanUrl = window.location.href.split('#')[0];
 
-      navigator.clipboard.writeText(fullShareUrl).then(() => {
-        showToast('🔗 Güncel Buluşma Takvimi linki kopyalandı!');
+      navigator.clipboard.writeText(cleanUrl).then(() => {
+        showToast('🔗 Canlı Buluşma Takvimi linki kopyalandı! Arkadaşlarına atabilirsin.');
       }).catch(() => {
-        prompt('Bu linki kopyalayıp WhatsApp grubuna atabilirsin:', fullShareUrl);
+        prompt('Bu linki kopyalayıp WhatsApp grubuna atabilirsin:', cleanUrl);
       });
     }
 
@@ -798,7 +803,7 @@
 
       Object.values(USERS).forEach(u => {
         const isActive = u.id === currentUser;
-        const status = appState.userStatus[u.id] || 'pending';
+        const status = appState.userStatus?.[u.id] || 'pending';
         const isUnavail = status === 'unavailable';
         const statusIcon = status === 'completed' ? '✅' : isUnavail ? '✖️' : '⏳';
 
@@ -837,7 +842,7 @@
 
     function updateMascotStage(actionType, customText = null) {
       const user = USERS[currentUser];
-      const isUnavailable = appState.userStatus[currentUser] === 'unavailable';
+      const isUnavailable = appState.userStatus?.[currentUser] === 'unavailable';
 
       const card = document.getElementById('mascotCard');
       const glow = document.getElementById('mascotBgGlow');
@@ -893,6 +898,7 @@
     }
 
     function toggleUnavailableStatus() {
+      if (!appState.userStatus) appState.userStatus = {};
       const current = appState.userStatus[currentUser];
       if (current === 'unavailable') {
         appState.userStatus[currentUser] = 'pending';
@@ -900,10 +906,10 @@
         spawnHeartParticle('✨');
       } else {
         appState.userStatus[currentUser] = 'unavailable';
-        Object.keys(appState.online).forEach(k => {
+        Object.keys(appState.online || {}).forEach(k => {
           appState.online[k] = (appState.online[k] || []).filter(u => u !== currentUser);
         });
-        Object.keys(appState.f2f).forEach(k => {
+        Object.keys(appState.f2f || {}).forEach(k => {
           appState.f2f[k] = (appState.f2f[k] || []).filter(u => u !== currentUser);
         });
         updateMascotStage('unavailable');
@@ -989,6 +995,7 @@
 
     function votePlatform(platformId) {
       if (!appState.platformVotes) appState.platformVotes = {};
+      if (!appState.meetingInfo) appState.meetingInfo = { platform: 'facetime', linkOrNumber: '' };
       appState.platformVotes[currentUser] = platformId;
       appState.meetingInfo.platform = platformId;
       triggerMascotJump();
@@ -1001,10 +1008,11 @@
 
     function saveMeetingLink() {
       const val = document.getElementById('meetingLinkInput').value.trim();
+      if (!appState.meetingInfo) appState.meetingInfo = { platform: 'facetime', linkOrNumber: '' };
       appState.meetingInfo.linkOrNumber = val;
       persistState();
       renderActiveMeetingBanner();
-      showToast('🚀 Görüşme bağlantısı kaydedildi!');
+      showToast('🚀 Görüşme bağlantısı kaydedildi ve herkese yansıtıldı!');
     }
 
     function renderActiveMeetingBanner() {
@@ -1097,7 +1105,7 @@
     }
 
     function getActiveUserCount() {
-      const activeCount = Object.values(appState.userStatus).filter(s => s !== 'unavailable').length;
+      const activeCount = Object.values(appState.userStatus || {}).filter(s => s !== 'unavailable').length;
       return Math.max(1, activeCount);
     }
 
@@ -1142,7 +1150,7 @@
 
         days.forEach(d => {
           const slotKey = `${d.key}_${trHour}`;
-          const participants = appState.online[slotKey] || [];
+          const participants = appState.online?.[slotKey] || [];
           const isSelectedByMe = participants.includes(currentUser);
           const isAllMatch = participants.length >= targetCount && participants.length > 0;
 
@@ -1152,7 +1160,7 @@
                 isAllMatch 
                   ? 'bg-amber-50/95 all-match-slot border-2' 
                   : isSelectedByMe 
-                    ? `${USERS[currentUser].theme.lightBg}${USERS[currentUser].theme.border} border-2` 
+                    ? `${USERS[currentUser].theme.lightBg} ${USERS[currentUser].theme.border} border-2` 
                     : 'bg-slate-50/70 hover:bg-slate-100 border-slate-200'
               }">
               <div class="flex items-center justify-between w-full px-1">
@@ -1183,7 +1191,7 @@
       let html = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">`;
 
       days.forEach(d => {
-        const isInTurkey = !!appState.inTurkeyDays[d.key];
+        const isInTurkey = !!appState.inTurkeyDays?.[d.key];
 
         html += `<div class="rounded-2xl border ${isInTurkey ? 'border-indigo-300 bg-indigo-50/25' : 'border-slate-200 bg-slate-50/40'} p-3 flex flex-col justify-between">
           <div>
@@ -1205,7 +1213,7 @@
 
         F2F_SLOTS.forEach(slot => {
           const slotKey = `${d.key}_${slot.id}`;
-          const participants = appState.f2f[slotKey] || [];
+          const participants = appState.f2f?.[slotKey] || [];
           const isSelectedByMe = participants.includes(currentUser);
           const isAllMatch = participants.length >= targetCount && participants.length > 0;
 
@@ -1215,7 +1223,7 @@
                 isAllMatch 
                   ? 'bg-amber-50 all-match-slot border-2' 
                   : isSelectedByMe 
-                    ? `${USERS[currentUser].theme.lightBg}${USERS[currentUser].theme.border} border-2` 
+                    ? `${USERS[currentUser].theme.lightBg} ${USERS[currentUser].theme.border} border-2` 
                     : 'bg-white hover:bg-slate-100 border-slate-200'
               }">
               <div class="flex items-center justify-between">
@@ -1244,10 +1252,12 @@
     }
 
     function toggleSlot(mode, slotKey) {
+      if (!appState.userStatus) appState.userStatus = {};
       if (appState.userStatus[currentUser] === 'unavailable') {
         appState.userStatus[currentUser] = 'pending';
       }
 
+      if (!appState[mode]) appState[mode] = {};
       if (!appState[mode][slotKey]) {
         appState[mode][slotKey] = [];
       }
@@ -1276,6 +1286,7 @@
     }
 
     function toggleInTurkeyDay(dayKey) {
+      if (!appState.inTurkeyDays) appState.inTurkeyDays = {};
       appState.inTurkeyDays[dayKey] = !appState.inTurkeyDays[dayKey];
       triggerMascotJump();
       updateMascotStage('idle', appState.inTurkeyDays[dayKey] 
@@ -1295,7 +1306,7 @@
 
       let doneCount = 0;
       container.innerHTML = Object.values(USERS).map(u => {
-        const st = appState.userStatus[u.id] || 'pending';
+        const st = appState.userStatus?.[u.id] || 'pending';
         const isUnavail = st === 'unavailable';
         if (st === 'completed' || isUnavail) doneCount++;
 
@@ -1332,12 +1343,12 @@
 
     function renderOverlapSummary() {
       const container = document.getElementById('overlapSummary');
-      const modeData = appState[currentMode];
+      const modeData = appState[currentMode] || {};
       const targetCount = getActiveUserCount();
       const offset = appState.torinoOffset || -1;
 
       const matches = Object.entries(modeData)
-        .filter(([_, users]) => users.length >= Math.max(2, targetCount - 1))
+        .filter(([_, users]) => Array.isArray(users) && users.length >= Math.max(2, targetCount - 1))
         .sort((a, b) => b[1].length - a[1].length);
 
       if (matches.length === 0) {
@@ -1390,6 +1401,7 @@
     }
 
     function completeSelection() {
+      if (!appState.userStatus) appState.userStatus = {};
       appState.userStatus[currentUser] = 'completed';
       persistState();
       triggerMascotJump();
@@ -1397,11 +1409,11 @@
       renderUserTabs();
       renderTeamStatusPanel();
       launchConfetti();
-      showToast(`🎉 ${USERS[currentUser].name} seçimini tamamladı!`);
+      showToast(`🎉 ${USERS[currentUser].name} seçimini tamamladı! Herkesin ekranında güncellendi.`);
     }
 
     function resetAllData() {
-      if (confirm('Tüm işaretlenen saatleri ve durumları sıfırlamak istediğine emin misin?')) {
+      if (confirm('Tüm işaretlenen saatleri ve durumları sıfırlamak istediğine emin misin? (Herkesin ekranında sıfırlanır)')) {
         appState = {
           torinoOffset: -1,
           online: {},
@@ -1463,6 +1475,88 @@
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+
+  <!-- FIREBASE GERÇEK ZAMANLI SENKRONİZASYON MODÜLÜ -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCkmzvO6RBzTPP_iBh5-Rsb4PeQ6_ZTi1s",
+      authDomain: "bulusma-takvimimiz.firebaseapp.com",
+      projectId: "bulusma-takvimimiz",
+      storageBucket: "bulusma-takvimimiz.firebasestorage.app",
+      messagingSenderId: "383820076856",
+      appId: "1:383820076856:web:c6bfa58ace6c21cdcfd3cd",
+      measurementId: "G-NLDJYD628Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const stateDocRef = doc(db, "bulusma_takvimi", "ortak_durum");
+
+    let isApplyingRemoteUpdate = false;
+
+    function setSyncStatus(connected) {
+      const badge = document.getElementById('syncStatusBadge');
+      const dot = document.getElementById('syncDot');
+      const text = document.getElementById('syncText');
+      if (!badge) return;
+
+      if (connected) {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200";
+        dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-500";
+        text.innerText = "Canlı Senkron Aktif";
+      } else {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 border border-rose-200";
+        dot.className = "w-1.5 h-1.5 rounded-full bg-rose-500";
+        text.innerText = "Çevrimdışı (Firestore Kontrol Et)";
+      }
+    }
+
+    // 1. VERİ YAZMA: Takvimde yapılan her değişikliği anında buluta kaydeder
+    window.syncStateToFirebase = async function(stateToSave) {
+      if (isApplyingRemoteUpdate) return;
+      try {
+        await setDoc(stateDocRef, {
+          stateJSON: JSON.stringify(stateToSave),
+          updatedAt: Date.now()
+        });
+        setSyncStatus(true);
+      } catch (e) {
+        console.error("Firebase kayıt hatası:", e);
+        setSyncStatus(false);
+      }
+    };
+
+    // 2. VERİ OKUMA: Başkası seçim yaptığında anında ekranı günceller
+    onSnapshot(stateDocRef, (docSnap) => {
+      setSyncStatus(true);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data && data.stateJSON) {
+          try {
+            const remoteState = JSON.parse(data.stateJSON);
+            if (JSON.stringify(remoteState) !== JSON.stringify(appState)) {
+              isApplyingRemoteUpdate = true;
+              appState = remoteState;
+              localStorage.setItem('bulusma_takvimi_state_v5', JSON.stringify(appState));
+              refreshUIFromCloud();
+              isApplyingRemoteUpdate = false;
+            }
+          } catch (err) {
+            console.error("Veri çözümleme hatası:", err);
+          }
+        }
+      } else {
+        // Veritabanı ilk kez açılıyorsa mevcut durumu yükle
+        window.syncStateToFirebase(appState);
+      }
+    }, (error) => {
+      console.error("Firebase dinleme hatası:", error);
+      setSyncStatus(false);
+    });
   </script>
 </body>
 </html>
